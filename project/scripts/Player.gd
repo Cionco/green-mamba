@@ -1,6 +1,6 @@
 extends AnimatedSprite
 
-var speed = 1
+var speed = 2
 var velocity = [0, 0]
 # Declare member variables here. Examples:
 # var a = 2
