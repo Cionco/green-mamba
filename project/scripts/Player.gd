@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Area2D
 
 var speed = 2
 var velocity = [0, 0]
@@ -15,29 +15,32 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_A) and velocity[0] == 0:
 		velocity = [-speed, 0]
 		self.rotation_degrees = -90
-		if !self.is_playing():
+		if !$Player.is_playing():
 			print("yummy")
-			self.play("Walk")
+			$Player.play("Walk")
 	elif Input.is_key_pressed(KEY_D) and velocity[0] == 0:
 		velocity = [speed, 0]
 		self.rotation_degrees = 90
-		if !self.is_playing():
+		if !$Player.is_playing():
 			print("yummy")
-			self.play("Walk")
+			$Player.play("Walk")
 	elif Input.is_key_pressed(KEY_W) and velocity[1] == 0:
 		velocity = [0, -speed]
 		self.rotation_degrees = 0
-		if !self.is_playing():
+		if !$Player.is_playing():
 			print("yummy")
-			self.play("Walk")
+			$Player.play("Walk")
 	elif Input.is_key_pressed(KEY_S) and velocity[1] == 0:
 		velocity = [0, speed]
 		self.rotation_degrees = 180
-		if !self.is_playing():
+		if !$Player.is_playing():
 			print("yummy")
-			self.play("Walk")
+			$Player.play("Walk")
 	
-	if self.position.x + velocity[0] > 0 and self.position.x + velocity[0] < get_viewport_rect().size.x:
-		self.position.x += velocity[0]
-	if self.position.y + velocity[1] > 0 and self.position.y + velocity[1] < get_viewport_rect().size.y:
-		self.position.y += velocity[1]
+	#if self.position.x + velocity[0] > 0 and self.position.x + velocity[0] < get_viewport_rect().size.x:
+	self.position.x += velocity[0]
+	#if self.position.y + velocity[1] > 0 and self.position.y + velocity[1] < get_viewport_rect().size.y:
+	self.position.y += velocity[1]
+
+func _on_Area2D_body_entered(body):
+	velocity = [0, 0]
